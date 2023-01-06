@@ -47,6 +47,7 @@ class AppxManifest {
       ${_config.languages!.map((language) => '<Resource Language="$language" />').join('')}
     </Resources>
     <Dependencies>
+      <TargetDeviceFamily Name="MSIXCore.Desktop" MinVersion="6.1.7601.0" MaxVersionTested="10.0.10240.0" />
       <TargetDeviceFamily Name="Windows.Desktop" MinVersion="${_config.osMinVersion}" MaxVersionTested="10.0.22000.1" />
     </Dependencies>
     <Capabilities>
@@ -115,11 +116,11 @@ class AppxManifest {
     String protocolsActivation = '';
     for (String protocol in _config.protocolActivation) {
       protocolsActivation += '''
-  <uap:Extension Category="windows.protocol">
-            <uap:Protocol Name="${protocol.toHtmlEscape()}">
-                <uap:DisplayName>${protocol.toHtmlEscape()} URI Scheme</uap:DisplayName>
-            </uap:Protocol>
-        </uap:Extension>''';
+  <uap3:Extension Category="windows.protocol">
+  <uap3:Protocol
+            Name="${protocol.toHtmlEscape()}"
+            Parameters="&quot;%1&quot;" />
+        </uap3:Extension>''';
     }
     return protocolsActivation;
   }

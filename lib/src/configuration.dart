@@ -73,6 +73,7 @@ class Configuration {
     appName = pubspec['name'];
     appDescription = pubspec['description'];
     dynamic yaml = pubspec['msix_config'] ?? YamlMap();
+    osMinVersion = yaml['os_Min_Version'] ?? '10.0.17763.0';
     msixVersion =
         _args['version'] ?? yaml['msix_version'] ?? _getPubspecVersion(pubspec);
     certificatePath = _args['certificate-path'] ?? yaml['certificate_path'];
